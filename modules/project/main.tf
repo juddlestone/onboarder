@@ -93,7 +93,7 @@ resource "azapi_resource" "budget" {
       }
       timeGrain = "Monthly"
       timePeriod = {
-        startDate = time_static.this.rfc3339
+        startDate = formatdate("YYYY-MM-'01'T00:00:00Z", time_static.this.rfc3339)
       }
     }
   }
