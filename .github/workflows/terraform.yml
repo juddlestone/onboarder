@@ -37,7 +37,6 @@ jobs:
           terraform_version: latest
 
       - name: Terraform Init
-        working-directory: terraform
         run: |
           terraform init \
             -backend-config="resource_group_name=${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}" \
@@ -48,15 +47,12 @@ jobs:
             ARM_USE_AZUREAD: "true"
 
       - name: Terraform Validate
-        working-directory: terraform
         run: terraform validate
 
       - name: Terraform Format Check
-        working-directory: terraform
         run: terraform fmt -check -recursive
 
       - name: Terraform Plan
-        working-directory: terraform
         run: |
           terraform plan \
             -var-file="environments/prd.tfvars" \
@@ -94,7 +90,6 @@ jobs:
           terraform_version: latest
 
       - name: Terraform Init
-        working-directory: terraform
         run: |
           terraform init \
             -backend-config="resource_group_name=${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}" \
@@ -112,7 +107,6 @@ jobs:
           path: terraform
 
       - name: Terraform Apply
-        working-directory: terraform
         run: terraform apply -auto-approve tfplan
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
