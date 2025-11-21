@@ -1,0 +1,21 @@
+{
+    "environments": {
+        "dev": {
+            "name": "development",
+            "subscription_id": "e84645e1-c41e-4d6b-b3b9-b4e196e3a5ca",
+            "location": "eastus"
+        },
+        "prd": {
+            "name": "production",
+            "subscription_id": "24b3426c-cd4a-4d61-977b-668866869ddc",
+            "location": "centralus"
+        }
+    },
+    "project_name": "my-test-project",
+    "project_owner": "jack@itsjack.cloud",
+    "project_budget_amount": 5,
+    "repository_name": "my-repo",
+    "repository_description": "Managed by Terraform",
+    "repository_visibility": "private",
+    "repository_gitignore_template": "Terraform"
+}
