@@ -54,7 +54,11 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -out=tfplan
+          terraform plan -out=tfplan \
+            -var="github_owner=${GITHUB_OWNER}" \
+            -var="github_app_id=${GITHUB_APP_ID}" \
+            -var="github_app_installation_id=${GITHUB_APP_INSTALLATION_ID}" \
+            -var="github_app_pem_file=${GITHUB_APP_PEM_FILE}"
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           GITHUB_OWNER: ${{ secrets.GH_ORGANIZATION }}

@@ -1,0 +1,20 @@
+variable "github_owner" {
+  description = "GitHub organization or user owner"
+  type        = string
+}
+
+variable "github_app_id" {
+  description = "GitHub App ID"
+  type        = string
+}
+
+variable "github_app_installation_id" {
+  description = "GitHub App Installation ID"
+  type        = string
+}
+
+variable "github_app_pem_file" {
+  description = "GitHub App PEM file content"
+  type        = string
+  sensitive   = true
+}

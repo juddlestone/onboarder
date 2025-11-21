@@ -143,7 +143,7 @@ resource "azapi_resource" "user_assigned_identity_role_assignment" {
       description      = "Provides 'Owner' permissions to the UAI in the ${each.key} environment"
       principalId      = azapi_resource.user_assigned_identity[each.key].output.properties.principalId
       principalType    = "ServicePrincipal"
-      roleDefinitionId = "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+      roleDefinitionId = "/subscriptions/${each.value.subscription_id}/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
     }
   }
 }
