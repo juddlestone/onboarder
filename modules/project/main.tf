@@ -108,6 +108,8 @@ resource "azapi_resource" "user_assigned_identity" {
   name      = module.naming[each.key].user_assigned_identity.name_unique
   location  = each.value.location
 
+  response_export_values = ["*"]
+
   tags = merge(local.common_tags, {
     Environment = each.key
   })
@@ -139,7 +141,7 @@ resource "azapi_resource" "user_assigned_identity_role_assignment" {
   body = {
     properties = {
       description      = "Provides 'Owner' permissions to the UAI in the ${each.key} environment"
-      principalId      = azapi_resource.user_assigned_identity[each.key].properties["principalId"]
+      principalId      = azapi_resource.user_assigned_identity[each.key].output.properties.principalId
       principalType    = "ServicePrincipal"
       roleDefinitionId = "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
     }
