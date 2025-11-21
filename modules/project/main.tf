@@ -1,5 +1,5 @@
 # Random
-resource "random_guid" "this" {
+resource "random_uuid" "this" {
   for_each = var.environments
 }
 
