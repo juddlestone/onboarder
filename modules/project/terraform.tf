@@ -1,6 +1,4 @@
 terraform {
-  backend "azurerm" {}
-
   required_providers {
     azapi = {
       source  = "Azure/azapi"

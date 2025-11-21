@@ -22,3 +22,4 @@ terraform {
 provider "azapi" {}
 
 provider "github" {}
+
