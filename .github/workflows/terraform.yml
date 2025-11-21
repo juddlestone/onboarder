@@ -54,17 +54,13 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -out=tfplan \
-            -var="github_owner=${GITHUB_OWNER}" \
-            -var="github_app_id=${GITHUB_APP_ID}" \
-            -var="github_app_installation_id=${GITHUB_APP_INSTALLATION_ID}" \
-            -var="github_app_pem_file=${GITHUB_APP_PEM_FILE}"
+          terraform plan -out=tfplan 
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          GITHUB_OWNER: ${{ secrets.GH_ORGANIZATION }}
-          GITHUB_APP_ID: ${{ secrets.GH_APP_ID }}
-          GITHUB_APP_INSTALLATION_ID: ${{ secrets.GH_APP_INSTALLATION_ID }}
-          GITHUB_APP_PEM_FILE: ${{ secrets.GH_APP_PEM_FILE }}
+          TF_VAR_GITHUB_OWNER: ${{ secrets.GH_ORGANIZATION }}
+          TF_VAR_GITHUB_APP_ID: ${{ secrets.GH_APP_ID }}
+          TF_VAR_GITHUB_APP_INSTALLATION_ID: ${{ secrets.GH_APP_INSTALLATION_ID }}
+          TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.GH_APP_PEM_FILE }}
 
       - name: Upload Plan
         uses: actions/upload-artifact@v4
@@ -115,7 +111,7 @@ jobs:
         run: terraform apply -auto-approve tfplan
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          GITHUB_OWNER: ${{ secrets.GH_ORGANIZATION }}
-          GITHUB_APP_ID: ${{ secrets.GH_APP_ID }}
-          GITHUB_APP_INSTALLATION_ID: ${{ secrets.GH_APP_INSTALLATION_ID }}
-          GITHUB_APP_PEM_FILE: ${{ secrets.GH_APP_PEM_FILE }}
+          TF_VAR_GITHUB_OWNER: ${{ secrets.GH_ORGANIZATION }}
+          TF_VAR_GITHUB_APP_ID: ${{ secrets.GH_APP_ID }}
+          TF_VAR_GITHUB_APP_INSTALLATION_ID: ${{ secrets.GH_APP_INSTALLATION_ID }}
+          TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.GH_APP_PEM_FILE }}

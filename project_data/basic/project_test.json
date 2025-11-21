@@ -3,12 +3,12 @@
         "dev": {
             "name": "development",
             "subscription_id": "e84645e1-c41e-4d6b-b3b9-b4e196e3a5ca",
-            "location": "uksouths"
+            "location": "uksouth"
         },
         "prd": {
             "name": "production",
             "subscription_id": "24b3426c-cd4a-4d61-977b-668866869ddc",
-            "location": "uksouths"
+            "location": "uksouth"
         }
     },
     "project_name": "my-test-project",
