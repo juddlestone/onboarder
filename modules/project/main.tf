@@ -135,7 +135,7 @@ resource "azapi_resource" "user_assigned_identity_role_assignment" {
   type     = "Microsoft.Authorization/roleAssignments@2022-04-01"
 
   parent_id = azapi_resource.resource_group[each.key].id
-  name      = random_guid.this[each.key].result
+  name      = random_uuid.this[each.key].result
   body = {
     properties = {
       description      = "Provides 'Owner' permissions to the UAI in the ${each.key} environment"
