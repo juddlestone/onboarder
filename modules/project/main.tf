@@ -48,7 +48,11 @@ resource "github_repository_file" "this" {
   overwrite_on_create = true
 }
 
-
+# resource "github_environment_secret" "this" {
+#   for_each    = var.environments
+#   environment = each.key
+#   repository  = github_repository.this.name
+#   secret_name =
 
 # AzAPI
 # Naming
