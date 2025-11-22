@@ -42,9 +42,9 @@ resource "github_repository_file" "file_workflow" {
   branch              = "main"
   file                = ".github/workflows/terraform-${each.key}.yml"
   content             = "**/*.tfstate"
-  commit_message      = "Terraform Initialization"
-  commit_author       = "Terraform"
-  commit_email        = "terraform@itsjack.cloud"
+  commit_message      = "Onboarder - Initialization"
+  commit_author       = "Onboarder"
+  commit_email        = "onboarder@itsjack.cloud"
   overwrite_on_create = true
 }
 
@@ -54,10 +54,14 @@ resource "github_repository_file" "file_terraform" {
   branch              = "main"
   file                = each.value
   content             = "# ./${each.value}"
-  commit_message      = "Terraform Initialization"
-  commit_author       = "Terraform"
-  commit_email        = "terraform@itsjack.cloud"
+  commit_message      = "Onboarder - Initialization"
+  commit_author       = "Onboarder"
+  commit_email        = "onboarder@itsjack.cloud"
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
 
 resource "github_actions_environment_secret" "env_secret_client_id" {
@@ -88,7 +92,7 @@ resource "github_actions_secret" "repo_secret" {
 module "naming" {
   for_each = var.environments
   source   = "Azure/naming/azurerm"
-  suffix   = [each.value.name, each.key]
+  suffix   = [var.project_name, each.key]
 }
 
 # Resource Group
