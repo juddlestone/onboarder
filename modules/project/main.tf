@@ -48,7 +48,7 @@ resource "github_repository_file" "this" {
   overwrite_on_create = true
 }
 
-resource "github_environment_secret" "env_secret_client_id" {
+resource "github_actions_environment_secret" "env_secret_client_id" {
   for_each        = var.environments
   environment     = each.key
   repository      = github_repository.this.name
@@ -56,7 +56,7 @@ resource "github_environment_secret" "env_secret_client_id" {
   plaintext_value = azapi_resource.user_assigned_identity[each.key].output.properties.clientId
 }
 
-resource "github_environment_secret" "env_secret_subscription_id" {
+resource "github_actions_environment_secret" "env_secret_subscription_id" {
   for_each        = var.environments
   environment     = each.key
   repository      = github_repository.this.name
