@@ -4,6 +4,7 @@ module "basic_projects" {
   source       = "./modules/project"
   environments = each.value.environments
 
+  azure_tenant_id               = data.azurerm_client_config.current.tenant_id
   project_name                  = each.value.project_name
   project_owner                 = each.value.project_owner
   project_budget_amount         = each.value.project_budget_amount
@@ -11,4 +12,5 @@ module "basic_projects" {
   repository_description        = each.value.repository_description
   repository_visibility         = each.value.repository_visibility
   repository_gitignore_template = each.value.repository_gitignore_template
+
 }
