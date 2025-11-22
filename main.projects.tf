@@ -4,7 +4,7 @@ module "basic_projects" {
   source       = "./modules/project"
   environments = each.value.environments
 
-  azure_tenant_id               = data.azurerm_client_config.current.tenant_id
+  azure_tenant_id               = data.azapi_client_config.current.tenant_id
   project_name                  = each.value.project_name
   project_owner                 = each.value.project_owner
   project_budget_amount         = each.value.project_budget_amount

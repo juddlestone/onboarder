@@ -64,7 +64,7 @@ resource "github_environment_secret" "env_secret_subscription_id" {
   plaintext_value = each.value.subscription_id
 }
 
-resource "github_repository_secret" "repo_secret" {
+resource "github_actions_secret" "repo_secret" {
   for_each        = local.repository_secrets
   repository      = github_repository.this.name
   secret_name     = each.value.name
