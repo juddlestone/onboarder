@@ -5,6 +5,14 @@ locals {
     TimeCreated  = "${time_static.this.year}/${time_static.this.month}/${time_static.this.day}"
   }
 
+  terraform_files = [
+    "main.tf",
+    "variables.tf",
+    "outputs.tf",
+    "locals.tf",
+    "terraform.tf"
+  ]
+
   repository_secrets = {
     AZURE_TENANT_ID = {
       name  = "AZURE_TENANT_ID"

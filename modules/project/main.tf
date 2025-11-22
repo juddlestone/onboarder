@@ -36,13 +36,25 @@ resource "github_repository_environment" "this" {
 }
 
 # Create a terraform workflow for each environment
-resource "github_repository_file" "this" {
+resource "github_repository_file" "file_workflow" {
   for_each            = var.environments
   repository          = github_repository.this.name
   branch              = "main"
   file                = ".github/workflows/terraform-${each.key}.yml"
   content             = "**/*.tfstate"
-  commit_message      = "Managed by Terraform"
+  commit_message      = "Terraform Initialization"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@itsjack.cloud"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "file_terraform" {
+  for_each            = toset(local.terraform_files)
+  repository          = github_repository.this.name
+  branch              = "main"
+  file                = each.value
+  content             = "# ./${each.value}"
+  commit_message      = "Terraform Initialization"
   commit_author       = "Terraform"
   commit_email        = "terraform@itsjack.cloud"
   overwrite_on_create = true
