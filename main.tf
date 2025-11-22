@@ -1,10 +1,9 @@
+# Time 
+# Used to generate tags with creation date
 resource "time_static" "this" {}
 
-import {
-  to = azapi_resource.resource_group
-  id = "/subscriptions/${var.management_subscription_id}/resourceGroups/rg-man-onboarder"
-}
-
+# Resource Group
+# Used for the state storage account and identity used to provision azure resources
 resource "azapi_resource" "resource_group" {
   type = "Microsoft.Resources/resourceGroups@2025-04-01"
 
@@ -14,11 +13,8 @@ resource "azapi_resource" "resource_group" {
   tags      = local.tags
 }
 
-import {
-  id = "/subscriptions/${var.management_subscription_id}/resourceGroups/rg-man-onboarder/providers/Microsoft.Storage/storageAccounts/stmanonboarder"
-  to = azapi_resource.storage_account
-}
-
+# Storage Account
+# Used to store terraform state files
 resource "azapi_resource" "storage_account" {
   type = "Microsoft.Storage/storageAccounts@2025-01-01"
 

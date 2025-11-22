@@ -1,3 +1,4 @@
+# Used to create basic, greenfield projects
 module "basic_projects" {
   for_each     = local.basic_projects
   source       = "./modules/project"

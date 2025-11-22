@@ -46,3 +46,28 @@ variable "repository_gitignore_template" {
   description = "The gitignore template to use for the GitHub repository."
   default     = "Terraform"
 }
+
+variable "azure_tenant_id" {
+  type        = string
+  description = "The Azure tenant ID."
+}
+
+variable "backend_resource_group_name" {
+  type        = string
+  description = "The name of the backend resource group for Terraform state."
+}
+
+variable "backend_storage_account_name" {
+  type        = string
+  description = "The name of the backend storage account for Terraform state."
+}
+
+variable "backend_container_name" {
+  type        = string
+  description = "The name of the backend container for Terraform state."
+}
+
+variable "backend_key" {
+  type        = string
+  description = "The key for the Terraform state file in the backend."
+}

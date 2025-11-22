@@ -48,11 +48,28 @@ resource "github_repository_file" "this" {
   overwrite_on_create = true
 }
 
-# resource "github_environment_secret" "this" {
-#   for_each    = var.environments
-#   environment = each.key
-#   repository  = github_repository.this.name
-#   secret_name =
+resource "github_environment_secret" "env_secret_client_id" {
+  for_each        = var.environments
+  environment     = each.key
+  repository      = github_repository.this.name
+  secret_name     = "AZURE_CLIENT_ID"
+  plaintext_value = azapi_resource.user_assigned_identity[each.key].output.properties.clientId
+}
+
+resource "github_environment_secret" "env_secret_subscription_id" {
+  for_each        = var.environments
+  environment     = each.key
+  repository      = github_repository.this.name
+  secret_name     = "AZURE_SUBSCRIPTION_ID"
+  plaintext_value = each.value.subscription_id
+}
+
+resource "github_repository_secret" "repo_secret" {
+  for_each        = local.repository_secrets
+  repository      = github_repository.this.name
+  secret_name     = each.value.name
+  plaintext_value = each.value.value
+}
 
 # AzAPI
 # Naming
@@ -136,6 +153,7 @@ resource "azapi_resource" "user_assigned_identity_federated_credential" {
 }
 
 # Role Assignment
+# Gives 'Owner' role to the UAI in the target resource group
 resource "azapi_resource" "user_assigned_identity_role_assignment" {
   for_each = var.environments
   type     = "Microsoft.Authorization/roleAssignments@2022-04-01"
