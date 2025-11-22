@@ -92,7 +92,7 @@ resource "github_actions_secret" "repo_secret" {
 module "naming" {
   for_each = var.environments
   source   = "Azure/naming/azurerm"
-  suffix   = [var.project_name, each.key]
+  suffix   = concat(split("-", var.project_name), [each.key])
 }
 
 # Resource Group
