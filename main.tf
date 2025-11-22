@@ -20,7 +20,7 @@ import {
 }
 
 resource "azapi_resource" "storage_account" {
-  type = "Microsoft.Storage/storageAccounts@2021-09-01"
+  type = "Microsoft.Storage/storageAccounts@2025-01-01"
 
   parent_id = azapi_resource.resource_group.id
   name      = "stmanonboarder"
@@ -29,24 +29,23 @@ resource "azapi_resource" "storage_account" {
     kind = "StorageV2"
     properties = {
       accessTier                   = "Hot"
-      allowBlobPublicAccess        = true
-      allowCrossTenantReplication  = true
+      allowBlobPublicAccess        = false
+      allowCrossTenantReplication  = false
       allowSharedKeyAccess         = true
       defaultToOAuthAuthentication = false
       encryption = {
         keySource = "Microsoft.Storage"
         services = {
-          queue = {
-            keyType = "Service"
+          blob = {
+            enabled = true
+            keyType = "Account"
           }
-          table = {
-            keyType = "Service"
+          file = {
+            enabled = true
+            keyType = "Account"
           }
         }
       }
-      isHnsEnabled      = false
-      isNfsV3Enabled    = false
-      isSftpEnabled     = false
       minimumTlsVersion = "TLS1_2"
       networkAcls = {
         defaultAction = "Allow"
@@ -55,7 +54,7 @@ resource "azapi_resource" "storage_account" {
       supportsHttpsTrafficOnly = true
     }
     sku = {
-      name = "Standard_LRS"
+      name = "Standard_RAGRS"
     }
   }
   tags                   = local.tags
