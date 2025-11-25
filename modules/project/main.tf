@@ -41,7 +41,7 @@ resource "github_repository_file" "file_workflow" {
   repository          = github_repository.this.name
   branch              = "main"
   file                = ".github/workflows/terraform-${each.key}.yml"
-  content             = "**/*.tfstate"
+  content             = replace(file("${path.module}/templates/workflow.yml"), "__ENV__", each.key)
   commit_message      = "Onboarder - Initialization"
   commit_author       = "Onboarder"
   commit_email        = "onboarder@itsjack.cloud"
